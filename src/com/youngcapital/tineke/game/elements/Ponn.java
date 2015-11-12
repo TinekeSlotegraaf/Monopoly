@@ -17,6 +17,7 @@ public class Ponn {
 		tile += numberThrown;
 		if(tile>39){
 			tile = tile%40;
+			// and get 200 pounds for the player...
 		}
 		System.out.println("moved to " + tile);
 	}

@@ -13,6 +13,22 @@ public class Player {
 		money = 1500;
 		hand = new Hand();
 	}
+	
+	/*
+	 * method to add money
+	 */
+	public void addMoney(int money){
+		this.money += money;
+	}
+	
+	/*
+	 * method to subtract money
+	 */
+	public void subtractMoney(int money){
+		// only do this when there is enough money...
+		// TODO iets maken dat zorgt dat mensen game over gaan als ze niet kunnen betalen.
+		this.money -= money;
+	}
 
 	public String getName() {
 		return name;
