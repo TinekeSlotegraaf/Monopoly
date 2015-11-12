@@ -1,0 +1,11 @@
+16 Chance cards
+16 Community Chest cards
+22 streets, divided into 8 color groups. Can build houses when owned all of a color group. Color group properties must be improved or "broken down" evenly.. -> See rules!
+4 railroads, collect £25 rent for 1, £50 rent for 2, £100 for 3, and £200 for all four.
+2 utilities, rent is 4 times the dice value if one utility is owned, 10 times if both are owned.
+2 Dice
+32 houses, 12 hotels
+Money: 20x £500, 20x £100, 30x £50, 50x £20, 40x £10, 40x £5, 40x £1 (but bank is actually never out of money, so not really important for this game).
+6 tokens: wheelbarrow, battleship, racecar, top hat, scottie dog, boot.
+
+People start with: 2x £500, 4x £100, 1x £50, 1x £20, 2x £10, 1x £5, 5x £1
