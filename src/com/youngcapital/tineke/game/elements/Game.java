@@ -58,7 +58,7 @@ public class Game {
 			checkCard(c, ponn, player);
 			System.out.println("Take a community chest card");
 			break;
-		case "Go to jail":
+		case "Go to Jail":
 			// move the ponn to 10 + make player.canMove false
 			ponn.setTile(10);
 			player.setCanMove(false);
@@ -109,27 +109,54 @@ public class Game {
 	 */
 	public void checkCard(Card card, Ponn ponn, Player player) {
 		String name = card.getName();
+		int oldPlace;
+		
 		switch (name) {
 		case "Go":
 			// Ponn is set to 0, Player get's 200 pounds
 			break;
 		case "Jail":
 			// Ponn is set to 10, Player cannot move
+			ponn.setTile(10);
+			player.setCanMove(false);
 			break;
 		case "PallMall":
 			// Ponn is set to 11, check if passes 0
+			oldPlace = ponn.getTile();
+			if(oldPlace>11){
+				player.addMoney(200);
+			}
+			ponn.setTile(11);
 			break;
 		case "Marylebone":
 			// Ponn is set to 15, check if passes 0
+			oldPlace = ponn.getTile();
+			if(oldPlace>15){
+				player.addMoney(200);
+			}
+			ponn.setTile(15);
 			break;
 		case "Trafalgar":
 			// Ponn is set to 24, check if passes 0
+			oldPlace = ponn.getTile();
+			if(oldPlace>24){
+				player.addMoney(200);
+			}
+			ponn.setTile(24);
 			break;
 		case "Mayfair":
 			// Ponn is set to 39
+			ponn.setTile(39);
 			break;
 		case "Back":
 			// Ponn is set three steps back
+			oldPlace = ponn.getTile();
+			int newPlace = oldPlace - 3;
+			// if it passes zero the value can't be negative
+			if(oldPlace<2){
+				newPlace = 40-newPlace;
+			}
+			ponn.setTile(newPlace);
 			break;
 		case "Repairs":
 			// pay for each house (25) and hotel (100) you have...
@@ -139,18 +166,26 @@ public class Game {
 			break;
 		case "SchoolFees":
 			// pay 150 pounds
+			player.subtractMoney(150);
+			freeParking.setMoney(150);
 			break;
 		case "Drunk":
 			// pay 20 pounds
+			player.subtractMoney(20);
+			freeParking.setMoney(20);
 			break;
 		case "Fine":
 			// pay 15 pounds
+			player.subtractMoney(15);
+			freeParking.setMoney(15);
 			break;
 		case "LoanMatures":
 			// get 150 pounds
+			player.addMoney(150);
 			break;
 		case "WonCompetition":
 			// get 100 pounds
+			player.addMoney(100);
 			break;
 		case "Dividend":
 			// get 50 pounds from each player
@@ -160,36 +195,50 @@ public class Game {
 			break;
 		case "KentRoad":
 			// Ponn goes to 1
+			ponn.setTile(1);
 			break;
 		case "Hospital":
 			// pay 100 pounds
+			player.subtractMoney(100);
+			freeParking.setMoney(100);
 			break;
 		case "Fee":
 			// pay 50
+			player.subtractMoney(50);
+			freeParking.setMoney(50);
 			break;
 		case "Insurance":
 			// pay 50
+			player.subtractMoney(50);
+			freeParking.setMoney(50);
 			break;
 		case "BankError":
 			// get 200 pounds
+			player.addMoney(200);
 			break;
 		case "AnnuityMatures":
 			// get 100 pounds
+			player.addMoney(100);
 			break;
 		case "Inherit":
 			// get 100 pounds
+			player.addMoney(100);
 			break;
 		case "Stock":
 			// get 50 pounds
+			player.addMoney(50);
 			break;
 		case "Interest":
 			// get 25 pounds
+			player.addMoney(25);
 			break;
 		case "TaxRefund":
 			// get 20 pounds
+			player.addMoney(20);
 			break;
 		case "WonContest":
 			// get 10 pounds
+			player.addMoney(10);
 			break;
 		case "Birthday":
 			// get 10 pounds from each player
