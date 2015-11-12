@@ -11,7 +11,6 @@ public class Tile {
 	private int hotel = 0;
 	private int costHouse;
 
-
 	public Tile(int index, String name, int cost, int[] rent, int mortgage, int costHouse) {
 		this.index = index;
 		this.name = name;
@@ -20,14 +19,62 @@ public class Tile {
 		this.mortgage = mortgage;
 		this.costHouse = costHouse;
 	}
-	
-		@Override
+
+	@Override
 	public String toString() {
-			String toReturn = name + cost;
+		String toReturn = name + cost;
 		return toReturn;
 	}
 
+	// do what is necessary on that tile..
+	public void checkTile() {
 
+		// switch over name
+		switch (name) {
+		case "Chance":
+			// take a chance card
+			System.out.println("Take a chance card");
+			break;
+		case "Community Chest":
+			// take a community chest card
+			System.out.println("Take a community chest card");
+			break;
+		case "Go to jail":
+			// move the ponn to 10 + make player.canMove false
+			System.out.println("Go to jail, do not pass start");
+			break;
+		case "Go":
+			// get 200 money
+			System.out.println("On Go, get 200 pounds");
+			break;
+		case "Income Tax":
+			// pay 200 money
+			System.out.println("Income Tax: pay 200 pounds");
+			break;
+		case "Jail":
+			// do nothing
+			System.out.println("Just visiting the jail");
+			break;
+		case "Free Parking":
+			// get money from FreeParking
+			System.out.println("Free parking, get all the money");
+			break;
+		case "Super Tax":
+			// pay 100 money
+			System.out.println("Pay super tax: 100 pounds");
+			break;
+		default:
+			// you have something you can buy
+			if(taken){
+				// pay rent
+				System.out.println("Pay rent");
+			} else{
+				// want to buy?
+				System.out.println("Want to buy?");
+			}
+			break;
+		}
+	}
 
 	public int getIndex() {
 		return index;
@@ -100,6 +147,5 @@ public class Tile {
 	public void setCostHouse(int costHouse) {
 		this.costHouse = costHouse;
 	}
-	
-	
+
 }
