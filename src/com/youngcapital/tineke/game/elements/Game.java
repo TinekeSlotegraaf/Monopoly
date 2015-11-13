@@ -34,7 +34,9 @@ public class Game {
 	public void move(Player player, int sum) {
 		Ponn ponn = player.getPonn();
 		// the ponn makes sure it stays on the board.
-		ponn.move(sum);
+		// it returns the amount of money the player gets (200 when moves over start, otherwise 0)
+		int giveMoney = ponn.move(sum);
+		player.addMoney(giveMoney);
 		// check the tile..
 		Tile tile = board.getTile(ponn.getTile());
 		checkTile(tile, player, ponn);
@@ -114,6 +116,8 @@ public class Game {
 		switch (name) {
 		case "Go":
 			// Ponn is set to 0, Player get's 200 pounds
+			ponn.setTile(0);
+			player.addMoney(200);
 			break;
 		case "Jail":
 			// Ponn is set to 10, Player cannot move

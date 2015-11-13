@@ -12,14 +12,18 @@ public class Ponn {
 		this.name = name;
 	}
 	
-	public void move(int numberThrown){
+	public int move(int numberThrown){
 		//  move the piece over the board.
 		tile += numberThrown;
+		int give = 0;
 		if(tile>39){
 			tile = tile%40;
-			// and get 200 pounds for the player...
+			// and get 200 pounds for the player
+			give = 200;
 		}
 		System.out.println("moved to " + tile);
+		System.out.println("give money " + give);
+		return give;
 	}
 
 	public int[] getPlaceOnBoard() {
