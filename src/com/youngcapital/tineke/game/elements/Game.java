@@ -6,42 +6,72 @@ import java.util.List;
 public class Game {
 	private Board board = new Board();
 	private List<Player> players = new ArrayList<Player>();
-	Dice dice1 = new Dice();
-	Dice dice2 = new Dice();
-	FreeParking freeParking = new FreeParking();
+	private Dice dice1 = new Dice();
+	private Dice dice2 = new Dice();
+	private int roll1;
+	private int roll2;
+	private FreeParking freeParking = new FreeParking();
 
+	/*
+	 * Make a Game object by instatiation a player with it's ponn
+	 */
 	public Game() {
 		Player player1 = new Player("Bob");
 
 		// add a ponn for the player to check if it works
-		Ponn ponn = new Ponn("reference", "boot");
+		Ponn ponn = new Ponn("boot.jpg", "boot");
 		player1.setPonn(ponn);
 		players.add(player1);
-		int sum = 0;
+		
+		// take a turn
+		//turn();
+	}
+	
+	/*
+	 * Getters for the two roll values of the dice.
+	 */
+	public int getRoll1(){
+		return roll1;
+	}
+	public int getRoll2(){
+		return roll2;
+	}
+	
+	public int[] getCoordinates(){
+		Player player = players.get(0);
+		Ponn ponn = player.getPonn();
+		int[] coordinates = ponn.getPlaceOnBoard();
+		return coordinates;
+	}
+	
+	
 
+	public int turn() {
 		// just throw the dice and add their value's
 		// must come at the start of each turn
-		while (ponn.getTile() != 2 && player1.isCanMove()) {
-			sum = dice1.getValue() + dice2.getValue();
-			System.out.println("Sum is " + sum);
-			move(players.get(0), sum);
-			System.out.println("your money is: " + player1.getMoney());
-
-		}
+		int sum = 0;
+		roll1 = dice1.getValue();
+		roll2 = dice2.getValue();
+		sum = roll1 + roll2;
+		System.out.println("Sum is " + sum);
+		move(players.get(0), sum);
+		//System.out.println("your money is: " + player1.getMoney());
+		return sum;
 	}
 
 	// Than the player needs to move
 	public void move(Player player, int sum) {
 		Ponn ponn = player.getPonn();
 		// the ponn makes sure it stays on the board.
-		// it returns the amount of money the player gets (200 when moves over start, otherwise 0)
+		// it returns the amount of money the player gets (200 when moves over
+		// start, otherwise 0)
 		int giveMoney = ponn.move(sum);
 		player.addMoney(giveMoney);
 		// move the ponn
 		Tile tile = board.getTile(ponn.getTile());
 		ponn.setPlaceOnBoard(tile.getCoordinates());
 		// check the tile..
-		checkTile(tile, player, ponn);
+		//checkTile(tile, player, ponn);
 	}
 
 	// do what is necessary on that tile..
@@ -114,7 +144,7 @@ public class Game {
 	public void checkCard(Card card, Ponn ponn, Player player) {
 		String name = card.getName();
 		int oldPlace;
-		
+
 		switch (name) {
 		case "Go":
 			// Ponn is set to 0, Player get's 200 pounds
@@ -129,7 +159,7 @@ public class Game {
 		case "PallMall":
 			// Ponn is set to 11, check if passes 0
 			oldPlace = ponn.getTile();
-			if(oldPlace>11){
+			if (oldPlace > 11) {
 				player.addMoney(200);
 			}
 			ponn.setTile(11);
@@ -137,7 +167,7 @@ public class Game {
 		case "Marylebone":
 			// Ponn is set to 15, check if passes 0
 			oldPlace = ponn.getTile();
-			if(oldPlace>15){
+			if (oldPlace > 15) {
 				player.addMoney(200);
 			}
 			ponn.setTile(15);
@@ -145,7 +175,7 @@ public class Game {
 		case "Trafalgar":
 			// Ponn is set to 24, check if passes 0
 			oldPlace = ponn.getTile();
-			if(oldPlace>24){
+			if (oldPlace > 24) {
 				player.addMoney(200);
 			}
 			ponn.setTile(24);
@@ -159,8 +189,8 @@ public class Game {
 			oldPlace = ponn.getTile();
 			int newPlace = oldPlace - 3;
 			// if it passes zero the value can't be negative
-			if(oldPlace<2){
-				newPlace = 40-newPlace;
+			if (oldPlace < 2) {
+				newPlace = 40 - newPlace;
 			}
 			ponn.setTile(newPlace);
 			break;

@@ -2,7 +2,7 @@ package com.youngcapital.tineke.game.elements;
 
 
 public class Ponn {
-	private int[] placeOnBoard = {0,0};
+	private int[] placeOnBoard = {60,900};
 	private int tile = 0;
 	private String name;
 	private String imageReference;

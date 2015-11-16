@@ -29,4 +29,17 @@ p {
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
+	z-index: -1;
+}
+
+.dice{
+	width: 25%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#ponn{
+	position: absolute;
+	width: 60px;
+	z-index: 1;
 }
