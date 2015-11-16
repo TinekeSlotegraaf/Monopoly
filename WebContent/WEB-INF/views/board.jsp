@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,7 +16,8 @@ function draw(){
 	// Create the HTML5 context object to enable draw methods
 	var ctx = canvas.getContext("2d");
 	var img = new Image();
-	img.src = "/resources/Board_London_Edition.jpg";
+	// make sure the url is right!!
+	img.src = '<c:url value="/resources/Board_London_Edition.jpg" />';
 	ctx.drawImage(img,0,0);
 	
 	
