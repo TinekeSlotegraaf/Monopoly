@@ -37,8 +37,10 @@ public class Game {
 		// it returns the amount of money the player gets (200 when moves over start, otherwise 0)
 		int giveMoney = ponn.move(sum);
 		player.addMoney(giveMoney);
-		// check the tile..
+		// move the ponn
 		Tile tile = board.getTile(ponn.getTile());
+		ponn.setPlaceOnBoard(tile.getCoordinates());
+		// check the tile..
 		checkTile(tile, player, ponn);
 	}
 

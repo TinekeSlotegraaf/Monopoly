@@ -32,6 +32,7 @@ public class Ponn {
 
 	public void setPlaceOnBoard(int[] placeOnBoard) {
 		this.placeOnBoard = placeOnBoard;
+		System.out.println("The new coordinates are: " + placeOnBoard[0] + " " + placeOnBoard[1]);
 	}
 
 	public int getTile() {

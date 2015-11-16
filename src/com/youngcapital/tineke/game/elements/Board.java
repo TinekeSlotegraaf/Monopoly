@@ -43,9 +43,12 @@ public class Board {
 				int rent5 = Integer.parseInt(cardData[8]);
 				int mortgage = Integer.parseInt(cardData[9]);
 				int costHouse = Integer.parseInt(cardData[10]);
+				int xCoordinate = Integer.parseInt(cardData[11]);
+				int yCoordinate = Integer.parseInt(cardData[12]);
 				int[] rent = { rent0, rent1, rent2, rent3, rent4, rent5 };
+				int[] coordinates = { xCoordinate, yCoordinate};
 
-				Tile t = new Tile(index, name, cost, rent, mortgage, costHouse);
+				Tile t = new Tile(index, name, cost, rent, mortgage, costHouse, coordinates);
 				tiles.add(t);
 			//	System.out.println(t.toString());
 			}

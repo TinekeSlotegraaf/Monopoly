@@ -10,14 +10,16 @@ public class Tile {
 	private int houses = 0;
 	private int hotel = 0;
 	private int costHouse;
+	private int[] coordinates = new int[2];
 
-	public Tile(int index, String name, int cost, int[] rent, int mortgage, int costHouse) {
+	public Tile(int index, String name, int cost, int[] rent, int mortgage, int costHouse, int[] coordinates) {
 		this.index = index;
 		this.name = name;
 		this.cost = cost;
 		this.rent = rent;
 		this.mortgage = mortgage;
 		this.costHouse = costHouse;
+		this.coordinates = coordinates;
 	}
 
 	@Override
@@ -98,6 +100,14 @@ public class Tile {
 
 	public void setCostHouse(int costHouse) {
 		this.costHouse = costHouse;
+	}
+
+	public int[] getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(int[] coordinates) {
+		this.coordinates = coordinates;
 	}
 
 }

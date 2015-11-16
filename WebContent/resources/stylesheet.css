@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+
+p {
+
+}
+
+.firstColumn{
+	float: left;
+	position: relative;
+	width: 15%;
+	left: 5%;	
+}
+
+.secondColumn{
+	float: left;
+	position: relative;
+	width: 60%;
+	left: 25%;
+}	
+
+.thirdColumn{
+	float: left;
+	position: relative;
+	width: 15%;
+	left: 80%;	
+}
+
+#boardImage {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
