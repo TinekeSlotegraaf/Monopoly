@@ -14,9 +14,10 @@ public class Game {
 	private int roll1;
 	private int roll2;
 	private FreeParking freeParking = new FreeParking();
+	private int whosTurn;
 
 	/*
-	 * Make a Game object by instatiation a player with it's ponn
+	 * Make a Game object by instantiation a player with it's ponn
 	 */
 	public Game() {
 		player1 = new Player("Bob");
@@ -64,6 +65,9 @@ public class Game {
 		Player[] players = {player1, player2, player3};
 		return players;
 	}
+	public int getTurn(){
+		return whosTurn;
+	}
 	
 
 	public int turn(Player player) {
@@ -75,6 +79,8 @@ public class Game {
 		sum = roll1 + roll2;
 		System.out.println("Sum is " + sum);
 		move(player, sum);
+		whosTurn++;
+		whosTurn = whosTurn%3;
 		//System.out.println("your money is: " + player1.getMoney());
 		return sum;
 	}

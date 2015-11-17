@@ -41,28 +41,39 @@
 					<a href="<c:url value="/diceRoll" />">Roll the Dice</a>
 				</h2>
 				<p>
-					<script>
-function changeImage() {
-    var dice1 = ${dice1};
-    var image = document.getElementById("dice1");
-    if (dice1==1) {
-        image.src = "<c:url value="/resources/dice1.jpg"/>"                                          ;
-    } else if(dice1==2){
-        image.src = "<c:url value="/resources/dice2.jpg"/>";
-    } else if(dice1==3){
-        image.src = "<c:url value="/resources/dice3.jpg"/>";
-    } else if(dice1==4){
-        image.src = "<c:url value="/resources/dice4.jpg"/>";
-    } else if(dice1==5){
-        image.src = "<c:url value="/resources/dice5.jpg"/>";
-    }else if(dice1==6){
-        image.src = "<c:url value="/resources/dice6.jpg"/>";
-    }
-}
+<script>
+//preload the six images first
+var face1=new Image()
+face1.src="<c:url value="/resources/dice1.jpg"/>"
+var face2=new Image()
+face2.src="<c:url value="/resources/dice2.jpg"/>"
+var face3=new Image()
+face3.src="<c:url value="/resources/dice3.jpg"/>"
+var face4=new Image()
+face4.src="<c:url value="/resources/dice4.jpg"/>"
+var face5=new Image()
+face5.src="<c:url value="/resources/dice5.jpg"/>"
+var face6=new Image()
+face6.src="<c:url value="/resources/dice6.jpg"/>"
 </script>
-		<img src="<c:url value="/resources/dice1.jpg"/>" onclick="changeImage()" class=dice id=dice1/> 
-		<img src="<c:url value="/resources/dice1.jpg"/>" class=dice id=dice2 />
+
+		<img src="<c:url value="/resources/dice1.jpg"/>" onclick="changeImage()" class=dice id=dice1 name=dice1/> 
+		<img src="<c:url value="/resources/dice1.jpg"/>" class=dice id=dice2 name=dice2 />
+		
+<script>
+
+    var diceValue = ${dice1};
+    var diceValue2 = ${dice2};
+    document.images.namedItem("dice1").src=eval("face"+diceValue+".src")
+        document.images.namedItem("dice2").src=eval("face"+diceValue2+".src")
+
+</script>
+
 				</p>
+				
+				<p> Hier komt de tekst van de tegel</p>
+				<p> Hier komt eventueel de tekst van de kaart </p>
+				<p> en een klein formulier met twee knoppen </p>
 
 			</div>
 

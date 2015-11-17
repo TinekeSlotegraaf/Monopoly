@@ -64,8 +64,11 @@ public class BoardController {
 
 	@RequestMapping(value = "/diceRoll")
 	public String turn(Model model) {
+		//Haal uit game wie er aan de beurt is!!
+		int who = game.getTurn();
+		
 		// kopieer hier de logica voor het doen van de volgende zet
-		int sum = game.turn(players[0]);
+		int sum = game.turn(players[who]);
 
 		// stop uitkomst dice roll in model
 		model.addAttribute("sum", sum);
