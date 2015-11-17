@@ -5,7 +5,10 @@ import java.util.List;
 
 public class Game {
 	private Board board = new Board();
-	private List<Player> players = new ArrayList<Player>();
+	//private List<Player> players = new ArrayList<Player>();
+	private Player player1;
+	private Player player2;
+	private Player player3;
 	private Dice dice1 = new Dice();
 	private Dice dice2 = new Dice();
 	private int roll1;
@@ -16,12 +19,18 @@ public class Game {
 	 * Make a Game object by instatiation a player with it's ponn
 	 */
 	public Game() {
-		Player player1 = new Player("Bob");
+		player1 = new Player("Bob");
+		player2 = new Player("Anne");
+		player3 = new Player("Chris");
 
 		// add a ponn for the player to check if it works
-		Ponn ponn = new Ponn("boot.jpg", "boot");
-		player1.setPonn(ponn);
-		players.add(player1);
+		Ponn ponn1 = new Ponn("boot.jpg", "boot");
+		Ponn ponn2 = new Ponn("battleship.jpg", "battleship");
+		Ponn ponn3 = new Ponn("tophat.jpg", "tophat");
+		player1.setPonn(ponn1);
+		player2.setPonn(ponn2);
+		player3.setPonn(ponn3);
+		//players.add(player1);
 		
 		// take a turn
 		//turn();
@@ -37,16 +46,27 @@ public class Game {
 		return roll2;
 	}
 	
-	public int[] getCoordinates(){
-		Player player = players.get(0);
+	public int[] getCoordinates(Player player){
 		Ponn ponn = player.getPonn();
 		int[] coordinates = ponn.getPlaceOnBoard();
 		return coordinates;
 	}
 	
+	public String getName(Player player){
+		return player.getName();
+	}
+	
+	public int getMoney(Player player){
+		return player.getMoney();
+	}
+	
+	public Player[] getPlayers(){
+		Player[] players = {player1, player2, player3};
+		return players;
+	}
 	
 
-	public int turn() {
+	public int turn(Player player) {
 		// just throw the dice and add their value's
 		// must come at the start of each turn
 		int sum = 0;
@@ -54,7 +74,7 @@ public class Game {
 		roll2 = dice2.getValue();
 		sum = roll1 + roll2;
 		System.out.println("Sum is " + sum);
-		move(players.get(0), sum);
+		move(player, sum);
 		//System.out.println("your money is: " + player1.getMoney());
 		return sum;
 	}

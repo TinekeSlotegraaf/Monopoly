@@ -7,8 +7,8 @@ p {
 .firstColumn{
 	float: left;
 	position: relative;
-	width: 15%;
-	left: 5%;	
+	width: 145px;
+	
 }
 
 .secondColumn{
@@ -16,14 +16,14 @@ p {
 	position: relative;
 	width: 966px;
 	height: 966px;
-	left: 20%;
+
 }	
 
 .thirdColumn{
 	float: left;
 	position: relative;
-	width: 15%;
-	left: 80%;	
+	width: 145px;
+	
 }
 
 #boardImage {
