@@ -14,8 +14,9 @@ p {
 .secondColumn{
 	float: left;
 	position: relative;
-	width: 60%;
-	left: 25%;
+	width: 966px;
+	height: 966px;
+	left: 20%;
 }	
 
 .thirdColumn{
