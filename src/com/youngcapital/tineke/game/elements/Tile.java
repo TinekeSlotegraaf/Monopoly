@@ -11,6 +11,7 @@ public class Tile {
 	private int hotel = 0;
 	private int costHouse;
 	private int[] coordinates = new int[2];
+	private int owner = 0;
 
 	public Tile(int index, String name, int cost, int[] rent, int mortgage, int costHouse, int[] coordinates) {
 		this.index = index;
@@ -108,6 +109,14 @@ public class Tile {
 
 	public void setCoordinates(int[] coordinates) {
 		this.coordinates = coordinates;
+	}
+
+	public int getOwner() {
+		return owner;
+	}
+
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 
 }

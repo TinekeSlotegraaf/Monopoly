@@ -78,6 +78,9 @@ public class BoardController {
 		// The tile is checked during the turn, we want to save the Strings
 		model.addAttribute("cardExplanation",game.getCardExplanation());
 		model.addAttribute("tileExplanation",game.getTileExplanation());
+		model.addAttribute("cardName", game.getNameCard());
+		model.addAttribute("tileName", game.getTileName());
+		model.addAttribute("costTile", game.getCostTile());
 
 		// save the coordinates
 		// Get the coordinates of the ponn, name, and amount of money per player

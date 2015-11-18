@@ -18,10 +18,13 @@
 			<div class=firstColumn>
 				<h2>${name1}</h2>
 				<p>money: ${money1}</p>
+				<p><img src='<c:url value="/resources/boot.jpg"  />' width=60 height=60/> </p>
 				<h2>${name2}</h2>
 				<p>money: ${money2}</p>
+				<p><img src='<c:url value="/resources/battleship.jpg" />' width=60 height=60/> </p>
 				<h2>${name3}</h2>
 				<p>money: ${money3}</p>
+				<p><img src='<c:url value="/resources/tophat.jpg" />'width=60 height=60 /> </p>
 			</div>
 			<div class=secondColumn>
 
@@ -71,8 +74,13 @@ face6.src="<c:url value="/resources/dice6.jpg"/>"
 
 				</p>
 				
-				<p> Hier komt de tekst van de tegel ${tileExplanation}</p>
-				<p> Hier komt eventueel de tekst van de kaart ${cardExplanation} </p>
+				<h2>Tile:</h2>
+				<p> ${tileName}</p>
+				<p> ${tileExplanation}</p>
+				<h2>Card:</h2>
+				<p> ${cardName} </p>
+				<p> Cost is ${costTile};
+				<p> ${cardExplanation} </p>
 				<p> en een klein formulier met twee knoppen </p>
 
 			</div>
@@ -86,6 +94,8 @@ var ctx1;
 var ctx2;
 var img1 = new Image();
 var img2 = new Image();
+var img3 = new Image();
+var img4 = new Image();
 var WIDTH = 966;
 var HEIGHT = 966;
 var xCoordinate1 = ${xCoordinate1};

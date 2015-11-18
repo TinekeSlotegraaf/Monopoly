@@ -9,6 +9,7 @@ public class Game {
 	private Player player1;
 	private Player player2;
 	private Player player3;
+	private Player[] players = new Player[3];
 	private Dice dice1 = new Dice();
 	private Dice dice2 = new Dice();
 	private int roll1;
@@ -17,6 +18,10 @@ public class Game {
 	private int whosTurn;
 	private String tileExplanation = "";
 	private String cardExplanation = "";
+	private String nameCard = "";
+	private int ownerTile;
+	private String tileName = "";
+	private int costTile = 0;
 
 	/*
 	 * Make a Game object by instantiation a player with it's ponn
@@ -33,6 +38,10 @@ public class Game {
 		player1.setPonn(ponn1);
 		player2.setPonn(ponn2);
 		player3.setPonn(ponn3);
+		
+		players[0] = player1;
+		players[1] = player2;
+		players[2] = player3;
 		//players.add(player1);
 		
 		// take a turn
@@ -79,6 +88,22 @@ public class Game {
 		return tileExplanation;
 	}
 	
+	public String getNameCard(){
+		return nameCard;
+	}
+	
+	public int getOwnerTile(){
+		return ownerTile;
+	}
+	
+	public String getTileName(){
+		return tileName;
+	}
+	
+	public int getCostTile(){
+		return costTile;
+	}
+	
 
 	public int turn(Player player) {
 		// just throw the dice and add their value's
@@ -114,6 +139,8 @@ public class Game {
 	public void checkTile(Tile tile, Player player, Ponn ponn) {
 		String name = tile.getName();
 		Card c = new Card();
+		tileName = tile.getName();
+		costTile = tile.getCost();
 		// switch over name
 		switch (name) {
 		case "Chance":
@@ -123,6 +150,7 @@ public class Game {
 		//	System.out.println("Take a chance card");
 			tileExplanation = "Take a chance card";
 			cardExplanation = c.getExplanation();
+			nameCard = c.getName();
 			break;
 		case "Community Chest":
 			// take a community chest card
@@ -131,6 +159,7 @@ public class Game {
 		//	System.out.println("Take a community chest card");
 			tileExplanation = "Take a community chest card";
 			cardExplanation = c.getExplanation();
+			nameCard = c.getName();
 			break;
 		case "Go to Jail":
 			// move the ponn to 10 + make player.canMove false
@@ -138,12 +167,16 @@ public class Game {
 			player.setCanMove(false);
 		//	System.out.println("Go to jail, do not pass start");
 			tileExplanation = "Go to jail, do not pass start";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		case "Go":
 			// get 200 money
 			player.addMoney(200);
 		//	System.out.println("On Go, get 200 pounds");
 			tileExplanation = "Go, get 200 pounds";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		case "Income Tax":
 			// pay 200 money
@@ -151,17 +184,23 @@ public class Game {
 			freeParking.setMoney(200);
 		//	System.out.println("Income Tax: pay 200 pounds");
 			tileExplanation = "Income Tax: pay 200 pounds";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		case "Jail":
 			// do nothing
 		//	System.out.println("Just visiting the jail");
 			tileExplanation = "Just visiting the jail";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		case "Free Parking":
 			// get money from FreeParking
 			player.addMoney(freeParking.getMoney());
 		//	System.out.println("Get all the money from Free Parking");
 			tileExplanation = "Get all the money from Free Parking";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		case "Super Tax":
 			// pay 100 money
@@ -169,6 +208,8 @@ public class Game {
 			freeParking.setMoney(100);
 		//	System.out.println("Pay super tax: 100 pounds");
 			tileExplanation = "Pay Super Tax: 100 pounds";
+			cardExplanation = "";
+			nameCard = "";
 			break;
 		default:
 			// you have something you can buy
@@ -178,12 +219,29 @@ public class Game {
 				tileExplanation = "Pay rent";
 				c = board.giveCard("tileCards", tile.getName());
 				cardExplanation = c.getExplanation();
+				nameCard = c.getName();
+				int[] rent = tile.getRent();
+				int houses = tile.getHouses();
+				// give money to the player who owns this tile.
+				player.subtractMoney(rent[houses]);
+				ownerTile = tile.getOwner();
+				players[ownerTile].addMoney(rent[houses]);
 			} else {
 				// want to buy?
 				c = board.giveCard("tileCards", tile.getName());
 		//		System.out.println("Want to buy?");
 				tileExplanation = "Want to buy this tile?";
 				cardExplanation = c.getExplanation();
+				nameCard = c.getName();
+				// just buy the tile for now!
+				int cost = tile.getCost();
+				int[] rent = tile.getRent();
+				System.out.println(rent[0] + "" + rent[1]);
+				tile.setOwner(whosTurn);
+				tile.setTaken(true);
+				player.subtractMoney(cost);
+				
+				
 			}
 			break;
 		}
@@ -195,16 +253,21 @@ public class Game {
 	public void checkCard(Card card, Ponn ponn, Player player) {
 		String name = card.getName();
 		int oldPlace;
+		Tile tile;
 
 		switch (name) {
 		case "Go":
 			// Ponn is set to 0, Player get's 200 pounds
 			ponn.setTile(0);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			player.addMoney(200);
 			break;
 		case "Jail":
 			// Ponn is set to 10, Player cannot move
 			ponn.setTile(10);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			player.setCanMove(false);
 			break;
 		case "PallMall":
@@ -214,6 +277,8 @@ public class Game {
 				player.addMoney(200);
 			}
 			ponn.setTile(11);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			break;
 		case "Marylebone":
 			// Ponn is set to 15, check if passes 0
@@ -222,6 +287,8 @@ public class Game {
 				player.addMoney(200);
 			}
 			ponn.setTile(15);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			break;
 		case "Trafalgar":
 			// Ponn is set to 24, check if passes 0
@@ -230,6 +297,8 @@ public class Game {
 				player.addMoney(200);
 			}
 			ponn.setTile(24);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			break;
 		case "Mayfair":
 			// Ponn is set to 39
@@ -244,6 +313,8 @@ public class Game {
 				newPlace = 40 - newPlace;
 			}
 			ponn.setTile(newPlace);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			break;
 		case "Repairs":
 			// pay for each house (25) and hotel (100) you have...
