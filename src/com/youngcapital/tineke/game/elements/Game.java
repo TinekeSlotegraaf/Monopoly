@@ -15,6 +15,8 @@ public class Game {
 	private int roll2;
 	private FreeParking freeParking = new FreeParking();
 	private int whosTurn;
+	private String tileExplanation = "";
+	private String cardExplanation = "";
 
 	/*
 	 * Make a Game object by instantiation a player with it's ponn
@@ -69,6 +71,14 @@ public class Game {
 		return whosTurn;
 	}
 	
+	public String getCardExplanation(){
+		return cardExplanation;
+	}
+	
+	public String getTileExplanation(){
+		return tileExplanation;
+	}
+	
 
 	public int turn(Player player) {
 		// just throw the dice and add their value's
@@ -97,7 +107,7 @@ public class Game {
 		Tile tile = board.getTile(ponn.getTile());
 		ponn.setPlaceOnBoard(tile.getCoordinates());
 		// check the tile..
-		//checkTile(tile, player, ponn);
+		checkTile(tile, player, ponn);
 	}
 
 	// do what is necessary on that tile..
@@ -110,55 +120,70 @@ public class Game {
 			// take a chance card
 			c = board.giveCard("chanceCards");
 			checkCard(c, ponn, player);
-			System.out.println("Take a chance card");
+		//	System.out.println("Take a chance card");
+			tileExplanation = "Take a chance card";
+			cardExplanation = c.getExplanation();
 			break;
 		case "Community Chest":
 			// take a community chest card
 			c = board.giveCard("communityChestCards");
 			checkCard(c, ponn, player);
-			System.out.println("Take a community chest card");
+		//	System.out.println("Take a community chest card");
+			tileExplanation = "Take a community chest card";
+			cardExplanation = c.getExplanation();
 			break;
 		case "Go to Jail":
 			// move the ponn to 10 + make player.canMove false
 			ponn.setTile(10);
 			player.setCanMove(false);
-			System.out.println("Go to jail, do not pass start");
+		//	System.out.println("Go to jail, do not pass start");
+			tileExplanation = "Go to jail, do not pass start";
 			break;
 		case "Go":
 			// get 200 money
 			player.addMoney(200);
-			System.out.println("On Go, get 200 pounds");
+		//	System.out.println("On Go, get 200 pounds");
+			tileExplanation = "Go, get 200 pounds";
 			break;
 		case "Income Tax":
 			// pay 200 money
 			player.subtractMoney(200);
 			freeParking.setMoney(200);
-			System.out.println("Income Tax: pay 200 pounds");
+		//	System.out.println("Income Tax: pay 200 pounds");
+			tileExplanation = "Income Tax: pay 200 pounds";
 			break;
 		case "Jail":
 			// do nothing
-			System.out.println("Just visiting the jail");
+		//	System.out.println("Just visiting the jail");
+			tileExplanation = "Just visiting the jail";
 			break;
 		case "Free Parking":
 			// get money from FreeParking
 			player.addMoney(freeParking.getMoney());
-			System.out.println("Get all the money from Free Parking");
+		//	System.out.println("Get all the money from Free Parking");
+			tileExplanation = "Get all the money from Free Parking";
 			break;
 		case "Super Tax":
 			// pay 100 money
 			player.subtractMoney(100);
 			freeParking.setMoney(100);
-			System.out.println("Pay super tax: 100 pounds");
+		//	System.out.println("Pay super tax: 100 pounds");
+			tileExplanation = "Pay Super Tax: 100 pounds";
 			break;
 		default:
 			// you have something you can buy
 			if (tile.isTaken()) {
 				// pay rent
-				System.out.println("Pay rent");
+		//		System.out.println("Pay rent");
+				tileExplanation = "Pay rent";
+				c = board.giveCard("tileCards", tile.getName());
+				cardExplanation = c.getExplanation();
 			} else {
 				// want to buy?
 				c = board.giveCard("tileCards", tile.getName());
-				System.out.println("Want to buy?");
+		//		System.out.println("Want to buy?");
+				tileExplanation = "Want to buy this tile?";
+				cardExplanation = c.getExplanation();
 			}
 			break;
 		}

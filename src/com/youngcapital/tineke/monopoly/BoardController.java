@@ -74,10 +74,13 @@ public class BoardController {
 		model.addAttribute("sum", sum);
 		model.addAttribute("dice1", game.getRoll1());
 		model.addAttribute("dice2", game.getRoll2());
+		
+		// The tile is checked during the turn, we want to save the Strings
+		model.addAttribute("cardExplanation",game.getCardExplanation());
+		model.addAttribute("tileExplanation",game.getTileExplanation());
 
 		// save the coordinates
-		// Get the coordinates of the ponn, name, and amount of money of player
-		// 1 and save them
+		// Get the coordinates of the ponn, name, and amount of money per player
 		int[] coordinates1 = game.getCoordinates(players[0]);
 		int xCoordinate1 = coordinates1[0];
 		int yCoordinate1 = coordinates1[1];
