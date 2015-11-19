@@ -30,7 +30,8 @@ public class BoardController {
 		model.addAttribute("yCoordinate1", yCoordinate1);
 		model.addAttribute("name1", name1);
 		model.addAttribute("money1", money1);
-	//	model.addAttribute("handCards1",game.getHandCardNames(players[0]));
+		String cardNames1 = game.getHandCardNames(players[0]);
+		model.addAttribute("handCards1",cardNames1);
 
 		// Get coordinates of the ponn of player 2
 		int[] coordinates2 = game.getCoordinates(players[1]);
@@ -42,7 +43,7 @@ public class BoardController {
 		model.addAttribute("yCoordinate2", yCoordinate2);
 		model.addAttribute("name2", name2);
 		model.addAttribute("money2", money2);
-	//	model.addAttribute("handCards2",game.getHandCardNames(players[1]));
+		model.addAttribute("handCards2",game.getHandCardNames(players[1]));
 
 		// Get coordinates of the ponn of player 3
 		int[] coordinates3 = game.getCoordinates(players[2]);
@@ -54,7 +55,7 @@ public class BoardController {
 		model.addAttribute("yCoordinate3", yCoordinate3);
 		model.addAttribute("name3", name3);
 		model.addAttribute("money3", money3);
-//		model.addAttribute("handCards3",game.getHandCardNames(players[2]));
+		model.addAttribute("handCards3",game.getHandCardNames(players[2]));
 		
 		//set value of dice to 1 so they can be shown
 		model.addAttribute("dice1",1);
@@ -96,7 +97,8 @@ public class BoardController {
 		model.addAttribute("yCoordinate1", yCoordinate1);
 		model.addAttribute("name1", name1);
 		model.addAttribute("money1", money1);
-	//	model.addAttribute("handCards1",game.getHandCardNames(players[0]));
+		String cardNames1 = game.getHandCardNames(players[0]);
+		model.addAttribute("handCards1",cardNames1);
 
 		// Get coordinates of the ponn of player 2
 		int[] coordinates2 = game.getCoordinates(players[1]);
@@ -108,7 +110,7 @@ public class BoardController {
 		model.addAttribute("yCoordinate2", yCoordinate2);
 		model.addAttribute("name2", name2);
 		model.addAttribute("money2", money2);
-	//	model.addAttribute("handCards2",game.getHandCardNames(players[1]));
+		model.addAttribute("handCards2",game.getHandCardNames(players[1]));
 
 		// Get coordinates of the ponn of player 3
 		int[] coordinates3 = game.getCoordinates(players[2]);
@@ -120,7 +122,7 @@ public class BoardController {
 		model.addAttribute("yCoordinate3", yCoordinate3);
 		model.addAttribute("name3", name3);
 		model.addAttribute("money3", money3);
-	//	model.addAttribute("handCards3",game.getHandCardNames(players[2]));
+		model.addAttribute("handCards3",game.getHandCardNames(players[2]));
 
 		return "board";
 	}

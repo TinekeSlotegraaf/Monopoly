@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +19,15 @@
 			<div class=firstColumn>
 				<h2>${name1}</h2>
 				<p>money: ${money1}</p>
-
+				<p> Owns: ${handCards1}</p>
 				<p><img src='<c:url value="/resources/boot.jpg"  />' width=60 height=60/> </p>
 				<h2>${name2}</h2>
 				<p>money: ${money2}</p>
-
+				<p> Owns: ${handCards2}</p>
 				<p><img src='<c:url value="/resources/battleship.jpg" />' width=60 height=60/> </p>
 				<h2>${name3}</h2>
 				<p>money: ${money3}</p>
-
+				<p> Owns: ${handCards3}</p>
 				<p><img src='<c:url value="/resources/tophat.jpg" />'width=60 height=60 /> </p>
 			</div>
 			<div class=secondColumn>

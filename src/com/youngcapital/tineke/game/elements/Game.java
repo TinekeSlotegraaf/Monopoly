@@ -1,6 +1,5 @@
 package com.youngcapital.tineke.game.elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -22,7 +21,6 @@ public class Game {
 	private int ownerTile;
 	private String tileName = "";
 	private int costTile = 0;
-	private String handCardNames = "";
 
 	/*
 	 * Make a Game object by instantiation a player with it's ponn
@@ -106,13 +104,14 @@ public class Game {
 	}
 	
 	public String getHandCardNames(Player player){
-		handCardNames = "";
+		String handCardNames = "";
 		Hand hand = player.getHand();
 		List<Card> handCards = hand.getCards();
 		for(Card card : handCards){
 			handCardNames += card.getName();
 			handCardNames += ", ";
 		}
+		System.out.println("Gets cards" + handCardNames);
 		return handCardNames;
 	}
 	
