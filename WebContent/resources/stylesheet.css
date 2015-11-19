@@ -1,13 +1,15 @@
 @CHARSET "ISO-8859-1";
 
 p {
-
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	
 }
 
 .firstColumn{
 	float: left;
 	position: relative;
 	width: 145px;
+	padding: 10px;
 	
 }
 
@@ -23,6 +25,7 @@ p {
 	float: left;
 	position: relative;
 	width: 145px;
+	padding: 10px
 	
 }
 

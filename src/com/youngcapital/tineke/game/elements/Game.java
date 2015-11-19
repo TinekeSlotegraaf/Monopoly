@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Game {
 	private Board board = new Board();
-	//private List<Player> players = new ArrayList<Player>();
+	// private List<Player> players = new ArrayList<Player>();
 	private Player player1;
 	private Player player2;
 	private Player player3;
@@ -22,6 +22,11 @@ public class Game {
 	private String tileName = "";
 	private int costTile = 0;
 
+	// just so they can be used to buy a tile
+	private Tile tile;
+	private Player player;
+	private Card c;
+
 	/*
 	 * Make a Game object by instantiation a player with it's ponn
 	 */
@@ -37,86 +42,88 @@ public class Game {
 		player1.setPonn(ponn1);
 		player2.setPonn(ponn2);
 		player3.setPonn(ponn3);
-		
+
 		players[0] = player1;
 		players[1] = player2;
 		players[2] = player3;
-		//players.add(player1);
-		
+		// players.add(player1);
+
 		// take a turn
-		//turn();
+		// turn();
 	}
-	
+
 	/*
 	 * Getters for the two roll values of the dice.
 	 */
-	public int getRoll1(){
+	public int getRoll1() {
 		return roll1;
 	}
-	public int getRoll2(){
+
+	public int getRoll2() {
 		return roll2;
 	}
-	
-	public int[] getCoordinates(Player player){
+
+	public int[] getCoordinates(Player player) {
 		Ponn ponn = player.getPonn();
 		int[] coordinates = ponn.getPlaceOnBoard();
 		return coordinates;
 	}
-	
-	public String getName(Player player){
+
+	public String getName(Player player) {
 		return player.getName();
 	}
-	
-	public int getMoney(Player player){
+
+	public int getMoney(Player player) {
 		return player.getMoney();
 	}
-	
-	public Player[] getPlayers(){
-		Player[] players = {player1, player2, player3};
+
+	public Player[] getPlayers() {
+		Player[] players = { player1, player2, player3 };
 		return players;
 	}
-	public int getTurn(){
+
+	public int getTurn() {
 		return whosTurn;
 	}
-	
-	public String getCardExplanation(){
+
+	public String getCardExplanation() {
 		return cardExplanation;
 	}
-	
-	public String getTileExplanation(){
+
+	public String getTileExplanation() {
 		return tileExplanation;
 	}
-	
-	public String getNameCard(){
+
+	public String getNameCard() {
 		return nameCard;
 	}
-	
-	public int getOwnerTile(){
+
+	public int getOwnerTile() {
 		return ownerTile;
 	}
-	
-	public String getTileName(){
+
+	public String getTileName() {
 		return tileName;
 	}
-	
-	public int getCostTile(){
+
+	public int getCostTile() {
 		return costTile;
 	}
-	
-	public String getHandCardNames(Player player){
+
+	public String getHandCardNames(Player player) {
 		String handCardNames = "";
 		Hand hand = player.getHand();
 		List<Card> handCards = hand.getCards();
-		for(Card card : handCards){
+		for (Card card : handCards) {
 			handCardNames += card.getName();
 			handCardNames += ", ";
 		}
 		System.out.println("Gets cards" + handCardNames);
 		return handCardNames;
 	}
-	
 
 	public int turn(Player player) {
+		this.player = player;
 		// just throw the dice and add their value's
 		// must come at the start of each turn
 		int sum = 0;
@@ -126,8 +133,8 @@ public class Game {
 		System.out.println("Sum is " + sum);
 		move(player, sum);
 		whosTurn++;
-		whosTurn = whosTurn%3;
-		//System.out.println("your money is: " + player1.getMoney());
+		whosTurn = whosTurn % 3;
+		// System.out.println("your money is: " + player1.getMoney());
 		return sum;
 	}
 
@@ -140,7 +147,7 @@ public class Game {
 		int giveMoney = ponn.move(sum);
 		player.addMoney(giveMoney);
 		// move the ponn
-		Tile tile = board.getTile(ponn.getTile());
+		tile = board.getTile(ponn.getTile());
 		ponn.setPlaceOnBoard(tile.getCoordinates());
 		// check the tile..
 		checkTile(tile, player, ponn);
@@ -149,7 +156,7 @@ public class Game {
 	// do what is necessary on that tile..
 	public void checkTile(Tile tile, Player player, Ponn ponn) {
 		String name = tile.getName();
-		Card c = new Card();
+		c = new Card();
 		tileName = tile.getName();
 		costTile = tile.getCost();
 		// switch over name
@@ -158,7 +165,7 @@ public class Game {
 			// take a chance card
 			c = board.giveCard("chanceCards");
 			checkCard(c, ponn, player);
-		//	System.out.println("Take a chance card");
+			// System.out.println("Take a chance card");
 			tileExplanation = "Take a chance card";
 			cardExplanation = c.getExplanation();
 			nameCard = c.getName();
@@ -167,7 +174,7 @@ public class Game {
 			// take a community chest card
 			c = board.giveCard("communityChestCards");
 			checkCard(c, ponn, player);
-		//	System.out.println("Take a community chest card");
+			// System.out.println("Take a community chest card");
 			tileExplanation = "Take a community chest card";
 			cardExplanation = c.getExplanation();
 			nameCard = c.getName();
@@ -176,7 +183,7 @@ public class Game {
 			// move the ponn to 10 + make player.canMove false
 			ponn.setTile(10);
 			player.setCanMove(false);
-		//	System.out.println("Go to jail, do not pass start");
+			// System.out.println("Go to jail, do not pass start");
 			tileExplanation = "Go to jail, do not pass start";
 			cardExplanation = "";
 			nameCard = "";
@@ -184,7 +191,7 @@ public class Game {
 		case "Go":
 			// get 200 money
 			player.addMoney(200);
-		//	System.out.println("On Go, get 200 pounds");
+			// System.out.println("On Go, get 200 pounds");
 			tileExplanation = "Go, get 200 pounds";
 			cardExplanation = "";
 			nameCard = "";
@@ -193,14 +200,14 @@ public class Game {
 			// pay 200 money
 			player.subtractMoney(200);
 			freeParking.setMoney(200);
-		//	System.out.println("Income Tax: pay 200 pounds");
+			// System.out.println("Income Tax: pay 200 pounds");
 			tileExplanation = "Income Tax: pay 200 pounds";
 			cardExplanation = "";
 			nameCard = "";
 			break;
 		case "Jail":
 			// do nothing
-		//	System.out.println("Just visiting the jail");
+			// System.out.println("Just visiting the jail");
 			tileExplanation = "Just visiting the jail";
 			cardExplanation = "";
 			nameCard = "";
@@ -208,7 +215,7 @@ public class Game {
 		case "Free Parking":
 			// get money from FreeParking
 			player.addMoney(freeParking.getMoney());
-		//	System.out.println("Get all the money from Free Parking");
+			// System.out.println("Get all the money from Free Parking");
 			tileExplanation = "Get all the money from Free Parking";
 			cardExplanation = "";
 			nameCard = "";
@@ -217,7 +224,7 @@ public class Game {
 			// pay 100 money
 			player.subtractMoney(100);
 			freeParking.setMoney(100);
-		//	System.out.println("Pay super tax: 100 pounds");
+			// System.out.println("Pay super tax: 100 pounds");
 			tileExplanation = "Pay Super Tax: 100 pounds";
 			cardExplanation = "";
 			nameCard = "";
@@ -226,7 +233,7 @@ public class Game {
 			// you have something you can buy
 			if (tile.isTaken()) {
 				// pay rent
-		//		System.out.println("Pay rent");
+				// System.out.println("Pay rent");
 				tileExplanation = "Pay rent";
 				c = board.giveCard("tileCards", tile.getName());
 				cardExplanation = c.getExplanation();
@@ -240,18 +247,26 @@ public class Game {
 			} else {
 				// want to buy?
 				c = board.giveCard("tileCards", tile.getName());
-		//		System.out.println("Want to buy?");
+				// System.out.println("Want to buy?");
 				tileExplanation = "Want to buy this tile?";
 				cardExplanation = c.getExplanation();
 				nameCard = c.getName();
-				// just buy the tile for now!
-				int cost = tile.getCost();
-				tile.setOwner(whosTurn);
-				tile.setTaken(true);
-				player.subtractMoney(cost);
-				player.giveCard(c);	
 			}
 			break;
+		}
+	}
+
+	public void buyTile() {
+		// add logic to make sure that tile can be bought:
+		if (!tile.isTaken()) {
+			tile.
+			
+			// just buy the tile for now!
+			int cost = tile.getCost();
+			tile.setOwner(whosTurn);
+			tile.setTaken(true);
+			player.subtractMoney(cost);
+			player.giveCard(c);
 		}
 	}
 

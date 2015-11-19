@@ -87,8 +87,8 @@ face6.src="<c:url value="/resources/dice6.jpg"/>"
 				<p> ${cardExplanation} </p>
 				
 				<form:form id="submitForm" method="post" modelAttribute="formBean" cssClass="cleanform">
-				<button type="submit" class="button" name="yes"> Yes </button>
-				<button type="submit" class="button" name="no"> No </button>
+				<button type="submit" class="button" name="yes" value="yes"> Yes </button>
+				<button type="submit" class="button" name="no" value="no"> No </button>
 				</form:form>
 			</div>
 
