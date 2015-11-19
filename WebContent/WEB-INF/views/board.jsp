@@ -114,9 +114,9 @@ var yCoordinate3 = ${yCoordinate3};
 
 function init(){
 	img1.src = '<c:url value="/resources/Board_London_Edition3.jpg" />';
-	img2.src = '<c:url value="/resources/boot.jpg" />';
-	img3.src = '<c:url value="/resources/battleship.jpg" />';
-	img4.src = '<c:url value="/resources/tophat.jpg" />';
+	img2.src = '<c:url value="/resources/boot.png" />';
+	img3.src = '<c:url value="/resources/battleship.png" />';
+	img4.src = '<c:url value="/resources/tophat.png" />';
 	// assign our canvas element to a variable
 	layer1 = document.getElementById("canvas1");
 	// Create the HTML5 context object to enable draw methods
