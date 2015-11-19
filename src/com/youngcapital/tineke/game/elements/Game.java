@@ -118,23 +118,34 @@ public class Game {
 			handCardNames += card.getName();
 			handCardNames += ", ";
 		}
-		System.out.println("Gets cards" + handCardNames);
 		return handCardNames;
 	}
 
 	public int turn(Player player) {
+		int sum = 0;
 		this.player = player;
 		// just throw the dice and add their value's
 		// must come at the start of each turn
-		int sum = 0;
 		roll1 = dice1.getValue();
 		roll2 = dice2.getValue();
 		sum = roll1 + roll2;
-		System.out.println("Sum is " + sum);
-		move(player, sum);
+		if(player.isCanMove() == true){
+			move(player, sum);
+		}else{
+			
+			tileName = "Jail";
+			tileExplanation = "Try to throw double to get out";
+			nameCard = "";
+			costTile = -1;
+			cardExplanation = "";
+			
+			if(roll1==roll2){
+				player.setCanMove(true);
+				move(player,sum);	
+			}
+		}
 		whosTurn++;
 		whosTurn = whosTurn % 3;
-		// System.out.println("your money is: " + player1.getMoney());
 		return sum;
 	}
 
@@ -182,6 +193,8 @@ public class Game {
 		case "Go to Jail":
 			// move the ponn to 10 + make player.canMove false
 			ponn.setTile(10);
+			tile = board.getTile(ponn.getTile());
+			ponn.setPlaceOnBoard(tile.getCoordinates());
 			player.setCanMove(false);
 			// System.out.println("Go to jail, do not pass start");
 			tileExplanation = "Go to jail, do not pass start";
@@ -258,9 +271,7 @@ public class Game {
 
 	public void buyTile() {
 		// add logic to make sure that tile can be bought:
-		if (!tile.isTaken()) {
-			tile.
-			
+		if (tile.isTaken() == false) {
 			// just buy the tile for now!
 			int cost = tile.getCost();
 			tile.setOwner(whosTurn);
@@ -373,6 +384,7 @@ public class Game {
 			break;
 		case "OutJail":
 			// keep in hand, can when in jail
+			player.giveCard(card);
 			break;
 		case "KentRoad":
 			// Ponn goes to 1

@@ -75,12 +75,8 @@ public class Board {
 		Card c = new Card();
 		if(deckname.equals("chanceCards")){
 			c = chanceCards.giveCard();
-			System.out.println("Gave a chance card");
-			System.out.println(c);
 		} else if(deckname.equals("communityChestCards")){
 			c = communityChestCards.giveCard();
-			System.out.println("Gave a community chest card");
-			System.out.println(c);
 		}
 		return c;
 	}
@@ -93,8 +89,6 @@ public class Board {
 		// check if the name of the deck is correct
 		if(deckName.equals("tileCards")){
 			c = tileCards.giveCard(cardName);
-			System.out.println("Gave a tile card");
-			System.out.println(c);
 		}
 		return c;
 	}
@@ -105,13 +99,10 @@ public class Board {
 	public void returnCard(String deckName, Card card){
 		if(deckName.equals("tileCards")){
 			tileCards.returnCard(card,true);
-			System.out.println("Returned a tile card");
 		} else if (deckName.equals("chanceCards")){
 			chanceCards.returnCard(card, false);
-			System.out.println("Returned a chance card");
 		} else if (deckName.equals("communityChestCard")){
 			communityChestCards.returnCard(card, false);
-			System.out.println("Returned a community chest card");
 		}
 	}
 	

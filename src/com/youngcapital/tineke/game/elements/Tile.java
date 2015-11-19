@@ -21,6 +21,11 @@ public class Tile {
 		this.mortgage = mortgage;
 		this.costHouse = costHouse;
 		this.coordinates = coordinates;
+		
+		// set some tiles like being taken, because they can't be bought.
+		if(index == 0 || index == 2 || index == 4 || index ==7 || index == 10 || index == 17 || index == 22 || index == 30 || index == 33 || index == 36 || index == 38){
+			taken=true;
+		}
 	}
 
 	@Override
