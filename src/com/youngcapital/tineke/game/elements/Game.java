@@ -22,6 +22,7 @@ public class Game {
 	private int ownerTile;
 	private String tileName = "";
 	private int costTile = 0;
+	private String handCardNames = "";
 
 	/*
 	 * Make a Game object by instantiation a player with it's ponn
@@ -102,6 +103,17 @@ public class Game {
 	
 	public int getCostTile(){
 		return costTile;
+	}
+	
+	public String getHandCardNames(Player player){
+		handCardNames = "";
+		Hand hand = player.getHand();
+		List<Card> handCards = hand.getCards();
+		for(Card card : handCards){
+			handCardNames += card.getName();
+			handCardNames += ", ";
+		}
+		return handCardNames;
 	}
 	
 
@@ -235,13 +247,10 @@ public class Game {
 				nameCard = c.getName();
 				// just buy the tile for now!
 				int cost = tile.getCost();
-				int[] rent = tile.getRent();
-				System.out.println(rent[0] + "" + rent[1]);
 				tile.setOwner(whosTurn);
 				tile.setTaken(true);
 				player.subtractMoney(cost);
-				
-				
+				player.giveCard(c);	
 			}
 			break;
 		}

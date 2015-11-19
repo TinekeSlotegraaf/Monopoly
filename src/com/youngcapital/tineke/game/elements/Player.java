@@ -70,6 +70,10 @@ public class Player {
 		this.canMove = canMove;
 	}
 	
+	public void giveCard(Card card){
+		hand.giveCard(card);
+	}
+	
 	
 
 }

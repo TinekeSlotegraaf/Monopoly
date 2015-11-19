@@ -9,7 +9,7 @@ public class Hand {
 	public Hand() {
 	}
 
-	public void getCard(Card c) {
+	public void giveCard(Card c) {
 		handCards.add(c);
 	}
 
@@ -27,5 +27,9 @@ public class Hand {
 		} else{
 		return handCards.remove(index);
 		}
+	}
+	
+	public List<Card> getCards(){
+		return handCards;
 	}
 }

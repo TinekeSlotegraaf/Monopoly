@@ -18,12 +18,15 @@
 			<div class=firstColumn>
 				<h2>${name1}</h2>
 				<p>money: ${money1}</p>
+
 				<p><img src='<c:url value="/resources/boot.jpg"  />' width=60 height=60/> </p>
 				<h2>${name2}</h2>
 				<p>money: ${money2}</p>
+
 				<p><img src='<c:url value="/resources/battleship.jpg" />' width=60 height=60/> </p>
 				<h2>${name3}</h2>
 				<p>money: ${money3}</p>
+
 				<p><img src='<c:url value="/resources/tophat.jpg" />'width=60 height=60 /> </p>
 			</div>
 			<div class=secondColumn>
@@ -81,8 +84,11 @@ face6.src="<c:url value="/resources/dice6.jpg"/>"
 				<p> ${cardName} </p>
 				<p> Cost is ${costTile};
 				<p> ${cardExplanation} </p>
-				<p> en een klein formulier met twee knoppen </p>
-
+				
+				<form:form id="submitForm" method="post" modelAttribute="formBean" cssClass="cleanform">
+				<button type="submit" class="button" name="yes"> Yes </button>
+				<button type="submit" class="button" name="no"> No </button>
+				</form:form>
 			</div>
 
 		</div>
@@ -106,7 +112,7 @@ var xCoordinate3 = ${xCoordinate3};
 var yCoordinate3 = ${yCoordinate3};
 
 function init(){
-	img1.src = '<c:url value="/resources/Board_London_Edition.jpg" />';
+	img1.src = '<c:url value="/resources/Board_London_Edition3.jpg" />';
 	img2.src = '<c:url value="/resources/boot.jpg" />';
 	img3.src = '<c:url value="/resources/battleship.jpg" />';
 	img4.src = '<c:url value="/resources/tophat.jpg" />';
